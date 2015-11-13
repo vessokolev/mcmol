@@ -27,7 +27,7 @@ c     etc.
       include 'include/pretop.h'
       include 'include/water.h'
 
-      integer i,i1,i2,minus1,hit_h
+      integer i,i1,i2,minus1,hit_h,k
       integer nword,word_pos(MAXWORD)
       real*8  e_bad
       character*(MXCHARACT) tmpline,tmplineup,xyzfile,topo_filename0,inppdb
@@ -252,6 +252,12 @@ c     for checking parameter problems if user edited parm_lib:
          endif
       endif
 c----------------------------------------------------------------
+      lfold2=.true.
+      ltrim=.true.
+      do k=1,3
+         trimcent(k)=0.0d0
+      end do
+      rtrim=0.0d0
       open(10,file=path_of_lib,status='old',form='formatted',err=9009)
       write(6,'(/,'' reading library data from: '',/,1x,A)')path_of_lib
       call readlib(0)
@@ -316,6 +322,7 @@ c     read in the parm lib
       call parmset
 
 c     read in pdb file
+      write(6,*) "$$$$$$$$$",lfold2,ltrim,rtrim
       call read_brk   
 
 c     checking if parameter misssing
