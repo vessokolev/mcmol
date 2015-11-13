@@ -57,5 +57,7 @@
       print *,"Energy after perturbation: ",E_tot
 
 
+      call init_cg
+
       end
 
